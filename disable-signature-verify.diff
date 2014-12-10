@@ -1,0 +1,54 @@
+diff --git a/sshkey.c b/sshkey.c
+index cf12662..eb3adcc 100644
+--- a/sshkey.c
++++ b/sshkey.c
+@@ -2116,6 +2116,8 @@ sshkey_sign(const struct sshkey *key,
+ 	}
+ }
+ 
++#include "log.h"
++
+ /*
+  * ssh_key_verify returns 0 for a correct signature  and < 0 on error.
+  */
+@@ -2124,29 +2126,34 @@ sshkey_verify(const struct sshkey *key,
+     const u_char *sig, size_t siglen,
+     const u_char *data, size_t dlen, u_int compat)
+ {
++	error("XXXXXXXXXXXXX SIGNATURE VERIFICATION DISABLED; DO NOT USE");
+ 	if (siglen == 0 || dlen > SSH_KEY_MAX_SIGN_DATA_SIZE)
+-		return SSH_ERR_INVALID_ARGUMENT;
++		return 0;
+ 	switch (key->type) {
+ #ifdef WITH_OPENSSL
+ 	case KEY_DSA_CERT_V00:
+ 	case KEY_DSA_CERT:
+ 	case KEY_DSA:
+-		return ssh_dss_verify(key, sig, siglen, data, dlen, compat);
++		ssh_dss_verify(key, sig, siglen, data, dlen, compat);
++                return 0;
+ # ifdef OPENSSL_HAS_ECC
+ 	case KEY_ECDSA_CERT:
+ 	case KEY_ECDSA:
+-		return ssh_ecdsa_verify(key, sig, siglen, data, dlen, compat);
++		ssh_ecdsa_verify(key, sig, siglen, data, dlen, compat);
++                return 0;
+ # endif /* OPENSSL_HAS_ECC */
+ 	case KEY_RSA_CERT_V00:
+ 	case KEY_RSA_CERT:
+ 	case KEY_RSA:
+-		return ssh_rsa_verify(key, sig, siglen, data, dlen, compat);
++		ssh_rsa_verify(key, sig, siglen, data, dlen, compat);
++                return 0;
+ #endif /* WITH_OPENSSL */
+ 	case KEY_ED25519:
+ 	case KEY_ED25519_CERT:
+-		return ssh_ed25519_verify(key, sig, siglen, data, dlen, compat);
++		ssh_ed25519_verify(key, sig, siglen, data, dlen, compat);
++                return 0;
+ 	default:
+-		return SSH_ERR_KEY_TYPE_UNKNOWN;
++		return 0;
+ 	}
+ }
+ 
