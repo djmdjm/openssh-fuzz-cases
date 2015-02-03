@@ -8,3 +8,4 @@ fuzz sessions inside tmux.
 If you want to use these, don't forget to patch sshkey.c to ignore
 signature errors. The disable-signature-verify.diff patch does this.
 
+[1] http://lcamtuf.coredump.cx/afl/
