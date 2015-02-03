@@ -1,6 +1,9 @@
-These are testcase inputs for fuzzing parts of OpenSSH. They are all
-pretty disorganised now, but I'm saving them for future use in
-detecting regressions.
+These are testcase inputs for fuzzing parts of OpenSSH using Michal
+Zalewski's afl-fuzz[1].
+
+They are all pretty disorganised now, but I'm saving them for future
+use in detecting regressions. There are some basic scripts to drive
+fuzz sessions inside tmux.
 
 If you want to use these, don't forget to patch sshkey.c to ignore
 signature errors. The disable-signature-verify.diff patch does this.
