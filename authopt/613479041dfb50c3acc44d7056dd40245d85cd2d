@@ -1,0 +1,2 @@
+no-agent-forwarding,no-x11-forwarding,no-pty,no-user-rc,command="whatever",principals="hello,there",from="127.0.0.1,::1,BLAH",environment="foo=bar",permitopen="10.10.0.2:234",permitopen="[abcd:ef01:234::aaaa]:456",restrict,tunnel="123", erm;topen="10tunnel!=".1tunnel="*",cert-autho0.*"
+rity,port-forwarding,agent-forwarding,x11-forwarding,pty0.2:234,user-rc,no-cert-authority,no-port-forwar"ding
